@@ -54,11 +54,18 @@ li::before{content:"•";color:var(--accent);margin-right:.45rem}
   box-shadow:0 4px 14px rgba(0,0,0,.25)}
 .btn-dl:hover{opacity:.9}
 
+/* -------- PRINT -------- */
 @media print{
   .theme-btn,.nav,.btn-dl{display:none}
-  body{background:#fff}h1{font-size:22pt}h2{color:#000;border-color:#000}
+  body{background:#fff}
+  h1{font-size:22pt}
+  h2{color:#000;border-color:#000}
   .card{box-shadow:none;border:0;padding:0;margin-bottom:1.2rem}
-  .chips span{background:#e5e7eb;color:#000}section{page-break-inside:avoid}}
+  .chips span{background:#e5e7eb;color:#000}
+  section{page-break-inside:avoid}
+  /* ensure hidden sections are visible in PDF */
+  .reveal{opacity:1 !important;transform:none !important}
+}
 </style>
 </head>
 <body>
@@ -83,7 +90,7 @@ li::before{content:"•";color:var(--accent);margin-right:.45rem}
     <li><b>6+ years</b> delivering ML & LLM products across fintech, SaaS, and utilities.</li>
     <li>Fraud & LLM-safety systems cut loss <b>25 %</b>, escalations <b>30 %</b>.</li>
     <li>Bridge product, engineering & research to ship scalable, explainable AI.</li>
-    <li>Proven record building fraud stacks and safety-hardened LLM apps.</li>
+    <li>Proven record building fraud stacks, XAI pipelines & safety-hardened LLM apps.</li>
   </ul>
 </section>
 
