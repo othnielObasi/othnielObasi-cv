@@ -54,22 +54,176 @@ li::before{content:"•";color:var(--accent);margin-right:.45rem}
   box-shadow:0 4px 14px rgba(0,0,0,.25)}
 .btn-dl:hover{opacity:.9}
 
-/* -------- PRINT -------- */
 @media print{
   .theme-btn,.nav,.btn-dl{display:none}
-  body{background:#fff}
-  h1{font-size:22pt}
-  h2{color:#000;border-color:#000}
+  body{background:#fff}h1{font-size:22pt}h2{color:#000;border-color:#000}
   .card{box-shadow:none;border:0;padding:0;margin-bottom:1.2rem}
-  .chips span{background:#e5e7eb;color:#000}
-  section{page-break-inside:avoid}
-  /* ensure hidden sections are visible in PDF */
-  .reveal{opacity:1 !important;transform:none !important}
-}
+  .chips span{background:#e5e7eb;color:#000}section{page-break-inside:avoid}}
 </style>
 </head>
 <body>
-<!-- everything below is unchanged … -->
-<!-- theme button, nav, snapshot, content, JS, etc. -->
+
+<!-- theme toggle -->
+<button class="theme-btn" id="themeBtn" aria-label="Toggle theme"><svg id="themeIcon"></svg></button>
+
+<!-- sticky nav -->
+<nav class="nav" id="scrollNav">
+  <a href="#snapshot">Home</a><a href="#skills">Skills</a><a href="#experience">Experience</a>
+  <a href="#additional">Additional</a><a href="#projects">Projects</a><a href="#education">Education</a>
+</nav>
+
+<main>
+
+<!-- === SNAPSHOT === -->
+<section class="card reveal" id="snapshot">
+  <h1>Othniel&nbsp;Obasi</h1>
+  <p style="font-size:1.05rem;font-weight:600">AI Strategist | ML/LLM Product Architect | NLP &amp; Fraud-Systems Expert</p>
+  <p style="margin-top:.35rem;color:var(--muted)">London, UK • <a href="tel:+447901062935">+44 790 106 2935</a> • <a href="mailto:othnielobasi@gmail.com">othnielobasi@gmail.com</a></p>
+  <ul style="margin-top:.55rem">
+    <li><b>6+ years</b> delivering ML & LLM products across fintech, SaaS, and utilities.</li>
+    <li>Fraud & LLM-safety systems cut loss <b>25 %</b>, escalations <b>30 %</b>.</li>
+    <li>Bridge product, engineering & research to ship scalable, explainable AI.</li>
+    <li>Proven record building fraud stacks and safety-hardened LLM apps.</li>
+  </ul>
+</section>
+
+<!-- === SKILLS === -->
+<section class="card reveal" id="skills">
+  <h2><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h5v5H4ZM4 15h5v5H4Zm11-11h5v5h-5Zm0 11h5v5h-5Z"/></svg> Key Skills & Tools</h2>
+  <div class="chips">
+    <span>Python</span><span>FastAPI</span><span>PyTorch</span><span>scikit-learn</span><span>LSTM</span>
+    <span>Neo4j</span><span>OpenTelemetry</span><span>SHAP/LIME</span><span>RAG</span><span>RLHF</span>
+    <span>Kafka</span><span>Pinecone</span><span>Docker</span><span>GCP</span><span>GitHub Actions</span>
+    <span>Explainable AI</span><span>Fraud Detection</span><span>LLM Safety</span>
+  </div>
+</section>
+
+<!-- === EXPERIENCE === -->
+<section class="card reveal" id="experience">
+  <h2><svg class="icon" viewBox="0 0 24 24"><path d="M6 3h12l3 5v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8l3-5Zm6 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg> Experience</h2>
+
+  <!-- Bezaleel -->
+  <div class="timeline">
+    <h3>AI Strategist – <em>Bezaleel Solutions</em><span class="date">2023 – Present</span></h3>
+    <p>Lead AI system design, LLM safety & observability for mission-critical SaaS.</p>
+    <ul>
+      <li><b>NL→SQL Analyst Agent:</b> 95 % parsing / 100 % execution; LLM-judge 92 % clarity; OpenTelemetry traces in Arize Phoenix.</li>
+      <li><b>Billing-bot hardening:</b> Safety rails blocked 85 % of 50+ red-team attacks; escalations −30 %.</li>
+    </ul>
+  </div>
+
+  <!-- Creditville -->
+  <div class="timeline">
+    <h3>Technical Product Manager – ML – <em>Creditville MFBank</em><span class="date">2022 – 2023</span></h3>
+    <p>Drove ML fraud, risk & CX products in a mobile-first finance stack.</p>
+    <ul>
+      <li>Launched three ML services (fraud, sentiment, auto-loan) delivering double-digit efficiency gains.</li>
+      <li>Explainability engine (LIME, DiCE) reduced triage time 40 %.</li>
+      <li>NLP insights API (Word2Vec, LDA, BERT) cut manual review 50 %.</li>
+      <li>Risk-feature engine lowered loan defaults 20 %.</li>
+    </ul>
+  </div>
+
+  <!-- PHED Lead -->
+  <div class="timeline">
+    <h3>Lead, AI & Analytics – <em>PHED</em><span class="date">2020 – 2022</span></h3>
+    <p>Pioneered first AI/ML programmes to modernise grid integrity.</p>
+    <ul>
+      <li>Real-time energy-fraud model reduced loss 25 %.</li>
+      <li>Cloud forecasting (95 % CI) accelerated budgeting by two weeks.</li>
+      <li>Python + Power Automate flows cut manual effort 30 %.</li>
+      <li>Executive dashboards process 2 M+ records per month.</li>
+    </ul>
+  </div>
+
+  <!-- PHED Analyst -->
+  <div class="timeline">
+    <h3>Senior Business Analyst & Product Owner – <em>PHED</em><span class="date">2016 – 2020</span></h3>
+    <p>Led Lean redesign & digital pilots for AI readiness.</p>
+    <ul>
+      <li>Mapped 80+ processes, lowering incidents 30 %.</li>
+      <li>Co-ordinated IoT pilots across 42 units; co-designed PoC dashboards.</li>
+      <li>Founded Change-Management committee; trained 200+ staff.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- === ADDITIONAL ROLES === -->
+<section class="card reveal" id="additional">
+  <h2><svg class="icon" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-5.18V17h2V9L12 3Zm0 8.89L4.28 9 12 5.11 19.72 9 12 11.89Z"/></svg> Additional Roles</h2>
+
+  <div class="timeline">
+    <h3>Founding Technical Lead – AI/ML – <em>Tech Genius Solutions</em><span class="date">2024 – Present</span></h3>
+    <ul>
+      <li>Fraud pipeline (Kafka → PyTorch → Neo4j) raised ring-recall 28 %.</li>
+      <li>Auto-retraining loops dropped missed fraud 17 %; adaptive MFA cut false positives 35 %.</li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+    <h3>LLM Training & Evaluation Specialist – <em>Outlier AI & Invisible Tech</em><span class="date">Jan 2024 – Jan 2025 | Remote</span></h3>
+    <ul>
+      <li>Flagged 150+ bias / factuality / safety issues.</li>
+      <li>Created 300+ RLHF prompt-pairs; win rate up 11 %.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- === PROJECTS === -->
+<section class="card reveal" id="projects">
+  <h2><svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16v2H4Zm0 6h16v2H4Zm0 6h16v2H4z"/></svg> Selected Projects</h2>
+
+  <h3>Fraud Detection via Logic Tensor Networks</h3>
+  <ul><li><em>Python • PyTorch • LTN • scikit-learn</em> – 93.1 % accuracy; logic consistency 0.94; 500-epoch CPU optimised.</li></ul>
+
+  <h3>LexSynergy AI – Legal Decision System</h3>
+  <ul><li><em>Legal-BERT • LSTM • Neo4j • SHAP • RAG • FastAPI</em> – 90 % outcome accuracy; SHAP/LIME explainability to statute level.</li></ul>
+
+  <h3>Distilled & Quantised ML Service (MNIST)</h3>
+  <ul><li><em>PyTorch • FastAPI • MLflow • W&amp;B • Docker • GCP • GitHub Actions</em> – 98 % accuracy &lt; 100 ms latency; zero-click CI/CD.</li></ul>
+</section>
+
+<!-- === EDUCATION === -->
+<section class="card reveal" id="education">
+  <h2><svg class="icon" viewBox="0 0 24 24"><path d="M12 3 1 9l11 6 9-5.18V17h2V9L12 3Zm0 8.89L4.28 9 12 5.11 19.72 9 12 11.89Z"/></svg> Education & Certifications</h2>
+  <ul>
+    <li><strong>M.Sc. Financial Engineering</strong> – WorldQuant University (US)</li>
+    <li><strong>M.Sc. Applied AI & Data Science (Distinction)</strong> – Southampton Solent University (UK)</li>
+    <li>Neo4j Certified Professional</li>
+    <li>Applied Data Science – Scientific Computing & Python (Honors) – WorldQuant University</li>
+  </ul>
+</section>
+
+<footer style="text-align:center;color:var(--muted);font-size:.8rem;margin:2rem 0 3rem">
+  Last updated: 11 Jun 2025
+</footer>
+</main>
+
+<!-- download -->
+<a href="Othniel_Obasi_CV.pdf" class="btn-dl" download>Download PDF</a>
+
+<!-- ===== JS ===== -->
+<script>
+/* theme toggle */
+const root=document.documentElement,btn=document.getElementById('themeBtn'),icon=document.getElementById('themeIcon');
+function setIcon(dark){icon.innerHTML=dark?'<path d="M21.64 13a1 1 0 0 0-1.11-1.45 7 7 0 0 1-8.08-8.08A1 1 0 0 0 11.45 2.36 9 9 0 1 0 21.64 13Z"/>':'<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>'}
+let dark=localStorage.getItem('theme')==='dark';if(dark)root.setAttribute('data-theme','dark');setIcon(dark);
+btn.onclick=()=>{dark=!dark;localStorage.setItem('theme',dark?'dark':'light');dark?root.setAttribute('data-theme','dark'):root.removeAttribute('data-theme');setIcon(dark)};
+
+/* scroll-spy */
+const navLinks=[...document.querySelectorAll('.nav a')];
+const sections=[...document.querySelectorAll('section[id]')];
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){
+    const id='#'+e.target.id;
+    navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')===id));
+  }});
+},{threshold:.35});
+sections.forEach(sec=>observer.observe(sec));
+
+/* reveal animation */
+const revealObs=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('show')),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+</script>
 </body>
 </html>
