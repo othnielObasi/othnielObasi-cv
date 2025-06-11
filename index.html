@@ -195,7 +195,7 @@ li::before{content:"•";color:var(--accent);margin-right:.45rem}
 </section>
 
 <footer style="text-align:center;color:var(--muted);font-size:.8rem;margin:2rem 0 3rem">
-  Last updated: Apr 2025
+  Last updated: 11 Jun 2025
 </footer>
 </main>
 
@@ -219,4 +219,11 @@ const observer=new IntersectionObserver(entries=>{
     navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')===id));
   }});
 },{threshold:.35});
-sections.
+sections.forEach(sec=>observer.observe(sec));
+
+/* reveal animation */
+const revealObs=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('show')),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+</script>
+</body>
+</html>
