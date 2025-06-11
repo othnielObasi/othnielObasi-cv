@@ -102,6 +102,7 @@ li::before{content:"•";color:var(--accent);margin-right:.45rem}
     <span>Neo4j</span><span>OpenTelemetry</span><span>SHAP/LIME</span><span>RAG</span><span>RLHF</span>
     <span>Kafka</span><span>Pinecone</span><span>Docker</span><span>GCP</span><span>GitHub Actions</span>
     <span>Explainable AI</span><span>Fraud Detection</span><span>LLM Safety</span>
+    <span>Product Ownership</span><span>Business Analysis</span><span>Team Collaboration</span><span>Road Mapping</span>
   </div>
 </section>
 
@@ -180,15 +181,29 @@ li::before{content:"•";color:var(--accent);margin-right:.45rem}
 <section class="card reveal" id="projects">
   <h2><svg class="icon" viewBox="0 0 24 24"><path d="M4 5h16v2H4Zm0 6h16v2H4Zm0 6h16v2H4z"/></svg> Selected Projects</h2>
 
-  <h3>Fraud Detection via Logic Tensor Networks</h3>
-  <ul><li><em>Python • PyTorch • LTN • scikit-learn</em> – 93.1 % accuracy; logic consistency 0.94; 500-epoch CPU optimised.</li></ul>
-
+ <h3>Fraud Detection via Logic Tensor Networks</h3>
+  <p><em>Python • PyTorch • LTN • scikit-learn</em></p>
+  <ul>    
+     <li>Achieved 93.1 % MLP accuracy (5-fold CV); added fuzzy-logic constraints using LTN.</li>
+     <li>Final logic-consistency score: 0.94; optimized CPU performance for 500-epoch runs.</li>
+  </ul>
   <h3>LexSynergy AI – Legal Decision System</h3>
-  <ul><li><em>Legal-BERT • LSTM • Neo4j • SHAP • RAG • FastAPI</em> – 90 % outcome accuracy; SHAP/LIME explainability to statute level.</li></ul>
+  <p><em>Legal-BERT • LSTM • Neo4j • SHAP • RAG • FastAPI</em></p>
+  <ul>  
+     <li>90 % accuracy in case outcome prediction via hybrid neuro-symbolic model.</li>  
+     <li>Embedded neural outputs into Neo4j graph with Cypher-based retrieval.</li>  
+     <li>Applied SHAP/LIME for legal explainability on precedent- and statute-level insights.</li>  
+  </ul>        
 
-  <h3>Distilled & Quantised ML Service (MNIST)</h3>
-  <ul><li><em>PyTorch • FastAPI • MLflow • W&amp;B • Docker • GCP • GitHub Actions</em> – 98 % accuracy &lt; 100 ms latency; zero-click CI/CD.</li></ul>
+  <h3>Distilled &amp; Quantised ML Service (MNIST Full Stack)</h3>
+  <p><em>PyTorch • FastAPI • MLflow • W&amp;B • PostgreSQL • Docker • GCP • GitHub Actions</em></p>
+  <ul>     
+     <li>Trained, distilled, and quantized a digit classifier achieving 98 % accuracy with < 100 ms inference latency; tracked evaluation metrics with MLflow and W&amp;B.</li>
+     <li>Integrated predictions with PostgreSQL for persistent storage and analytics.</li>
+     <li>Containerized with Docker, deployed on GCP, and automated CI/CD with GitHub Actions for zero-click updates.</li>
+  </ul> 
 </section>
+
 
 <!-- === EDUCATION === -->
 <section class="card reveal" id="education">
