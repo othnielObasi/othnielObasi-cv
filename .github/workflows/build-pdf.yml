@@ -5,38 +5,60 @@ on:
     branches: [main]
 
 permissions:
-  contents: write
+  contents: write          # allow committing the generated PDF back to the repo
 
 jobs:
   build-pdf:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-22.04   # Jammy runner keeps package names simple
 
     steps:
+    # 1) Pull your code
     - name: 📥 Checkout
       uses: actions/checkout@v4
 
-    - name: 🖋️ Install fonts/libs   # optional on 22.04, keeps Chrome quiet
+    # 2) Extra fonts/libs for headless Chrome (optional but quiets warnings)
+    - name: 🖋️ Install fonts/libs
       run: |
         sudo apt-get update
         sudo apt-get install -y fonts-liberation libasound2 libatk-bridge2.0-0 \
           libgtk-3-0 libxss1 libnss3 libgbm1
 
+    # 3) Node 20.x
     - name: 🛠️ Setup Node
       uses: actions/setup-node@v4
       with:
         node-version: "20"
 
+    # 4) Get Puppeteer locally
     - name: 📦 Install Puppeteer
       run: npm install puppeteer --save-dev
 
+    # 5) Render index.html → PDF with a tiny inline script
     - name: 🖨️ Render HTML → PDF
       run: |
-        npx puppeteer pdf index.html \
-          --output Othniel_Obasi_CV.pdf \
-          --format A4 \
-          --margin "20mm 15mm" \
-          --no-sandbox
+        node - <<'EOF'
+        const fs = require('fs');
+        const puppeteer = require('puppeteer');
+        (async () => {
+          const browser = await puppeteer.launch({
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+          });
+          const page = await browser.newPage();
+          const htmlPath = 'file://' + process.cwd() + '/index.html';
+          await page.goto(htmlPath, { waitUntil: 'networkidle0' });
+          await page.pdf({
+            path: 'Othniel_Obasi_CV.pdf',
+            format: 'A4',
+            printBackground: true,
+            margin: { top: '20mm', bottom: '20mm', left: '15mm', right: '15mm' }
+          });
+          await browser.close();
+          console.log('✅ PDF created — workspace contents:');
+          fs.readdirSync('.').forEach(f => console.log(' -', f));
+        })();
+        EOF
 
+    # 6) Commit the PDF only if it changed
     - name: 🔍 Check for changes
       id: diff
       run: |
