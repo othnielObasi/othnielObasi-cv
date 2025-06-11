@@ -5,54 +5,53 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: write     # allow committing the generated PDF
-  pages: write        # optional, only if you deploy via GH Pages
-  id-token: write     # needed for Pages auth
+  contents: write   # allow committing the generated PDF
 
 jobs:
-  html-to-pdf:
+  build-pdf:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 📥 Checkout repo
+    - name: 📥 Checkout
       uses: actions/checkout@v4
+
+    # Optional but avoids Puppeteer font warnings
+    - name: 🖋️ Install fonts/libs
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y fonts-liberation libasound2 libatk-bridge2.0-0 \
+          libgtk-3-0 libxss1 libnss3 libgbm1
 
     - name: 🛠️ Setup Node
       uses: actions/setup-node@v4
       with:
         node-version: "20"
+        cache: "npm"
 
-    - name: 📦 Install puppeteer
+    - name: 📦 Install deps (incl. puppeteer)
       run: |
-        npm install -g puppeteer
+        npm ci --ignore-scripts    # if you add a package.json later
+        npm install puppeteer --save-dev
 
-    - name: 🖨️ Render index.html to PDF
+    - name: 🖨️ Render HTML → PDF
       run: |
-        node - <<'EOF'
-        const fs = require('fs');
-        const puppeteer = require('puppeteer');
-        (async () => {
-          const browser = await puppeteer.launch({args:['--no-sandbox','--disable-setuid-sandbox']});
-          const page = await browser.newPage();
-          await page.goto('file://' + process.cwd() + '/index.html', {waitUntil:'networkidle0'});
-          await page.pdf({
-            path: 'Othniel_Obasi_CV.pdf',
-            format: 'A4',
-            printBackground: true,
-            margin: {top:'20mm',bottom:'20mm',left:'15mm',right:'15mm'}
-          });
-          await browser.close();
-        })();
-        EOF
+        npx puppeteer pdf index.html \
+          --output Othniel_Obasi_CV.pdf \
+          --format A4 \
+          --margin "20mm 15mm" \
+          --no-sandbox
 
-    - name: 🗃️ Commit PDF
+    - name: 🔍 Check for changes
+      id: diff
       run: |
-        git config --global user.name  "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
         git add Othniel_Obasi_CV.pdf
-        if git diff --cached --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "chore: update generated CV PDF"
-          git push
-        fi
+        git diff --cached --quiet || echo "changed=true" >> $GITHUB_OUTPUT
+
+    - name: 🚀 Commit updated PDF
+      if: steps.diff.outputs.changed == 'true'
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name  "GitHub Actions"
+        git commit -m "chore: update generated CV PDF [skip-pdf]"
+        git push
