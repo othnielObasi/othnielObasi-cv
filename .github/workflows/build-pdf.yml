@@ -1,0 +1,58 @@
+name: Build & Publish CV PDF
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: write     # allow committing the generated PDF
+  pages: write        # optional, only if you deploy via GH Pages
+  id-token: write     # needed for Pages auth
+
+jobs:
+  html-to-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout repo
+      uses: actions/checkout@v4
+
+    - name: 🛠️ Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+
+    - name: 📦 Install puppeteer
+      run: |
+        npm install -g puppeteer
+
+    - name: 🖨️ Render index.html to PDF
+      run: |
+        node - <<'EOF'
+        const fs = require('fs');
+        const puppeteer = require('puppeteer');
+        (async () => {
+          const browser = await puppeteer.launch({args:['--no-sandbox','--disable-setuid-sandbox']});
+          const page = await browser.newPage();
+          await page.goto('file://' + process.cwd() + '/index.html', {waitUntil:'networkidle0'});
+          await page.pdf({
+            path: 'Othniel_Obasi_CV.pdf',
+            format: 'A4',
+            printBackground: true,
+            margin: {top:'20mm',bottom:'20mm',left:'15mm',right:'15mm'}
+          });
+          await browser.close();
+        })();
+        EOF
+
+    - name: 🗃️ Commit PDF
+      run: |
+        git config --global user.name  "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add Othniel_Obasi_CV.pdf
+        if git diff --cached --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "chore: update generated CV PDF"
+          git push
+        fi
